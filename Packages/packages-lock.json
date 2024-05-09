@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "com.ptc.vuforia.engine": {
+      "version": "file:com.ptc.vuforia.engine-10.22.5.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0"
+      }
+    },
     "com.unity.collab-proxy": {
       "version": "2.3.1",
       "depth": 0,
@@ -152,11 +160,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arcore": {
-      "version": "5.1.2",
+      "version": "5.1.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.xr.arfoundation": "5.1.2",
+        "com.unity.xr.arfoundation": "5.1.4",
         "com.unity.xr.core-utils": "2.1.0",
         "com.unity.xr.management": "4.0.1",
         "com.unity.modules.androidjni": "1.0.0",
@@ -165,7 +173,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arfoundation": {
-      "version": "5.1.2",
+      "version": "5.1.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
