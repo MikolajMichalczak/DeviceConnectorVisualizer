@@ -8,19 +8,36 @@ public class ModelManipulation : MonoBehaviour
     [SerializeField]
     private float sensitivity = 0.3f;
     [SerializeField]
-    private float moveSpeed = 1f;
-    [SerializeField]
     private float zoomSpeed = 0.7f;
+    [SerializeField]
+    private string selectableTag = "selectable";
+    [SerializeField]
+    private Material highlightMaterial;
+    [SerializeField]
+    private Material defaultMaterial;
+    [SerializeField]
+    private List<GameObject> ports;
 
     private float dist;
     private bool dragging = false;
     private Vector3 offset;
+    Transform selection;
 
     void Update()
     {
+        if (ModeSelector.Selector.mode != ModeSelector.Mode.view)
+        {
+            //Wyłączanie widoczności portów
+            HighlightPorts(false);
+            if (selection != null)
+            {
+                ResetViewedObj(selection.gameObject);
+            }
+        }
         switch (ModeSelector.Selector.mode)
         {
             case ModeSelector.Mode.view:
+                HighlightPorts(true);
                 ViewObj();
                 break;
             case ModeSelector.Mode.rotate:
@@ -40,7 +57,61 @@ public class ModelManipulation : MonoBehaviour
 
     void ViewObj()
     {
-        //TODO: wybór portu lub złącza
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            if (Input.GetTouch(i).phase == TouchPhase.Began)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    Transform currentSelection = hit.transform;
+                    if (currentSelection.CompareTag(selectableTag))
+                    {
+                        if (selection != null && selection != currentSelection)
+                        {
+                            ResetViewedObj(selection.gameObject);
+                        }
+                        selection = currentSelection;
+                        HandleSelectedObj(selection.gameObject);
+                    }
+                }
+            }
+        }
+    }
+
+    void HandleSelectedObj(GameObject obj)
+    {
+        SetMaterial(obj, highlightMaterial);
+        if(!obj.TryGetComponent<Port>(out Port port))
+        {
+            Debug.LogWarning("Component not found -> port");
+            return;
+        }
+
+        //TODO: wyświetlanie wtyczki, zmienna port ma w sobie info w co kliknął uzytkownik, można do niej wsadzic model wtyczki do wyświeltenia idk
+        
+    }
+
+    void ResetViewedObj(GameObject obj)
+    {
+        SetMaterial(obj, defaultMaterial);
+        //TODO: usuwanie modelu/info o wyświetlanej wtyczce
+    }
+
+    void HighlightPorts(bool isActive)
+    {
+        foreach (var port in ports)
+        {
+            port.SetActive(isActive);
+        }
+    }
+
+    void SetMaterial(GameObject obj, Material material)
+    {
+        if (obj.TryGetComponent<Renderer>(out var selectionRenderer))
+        {
+            selectionRenderer.material = material;
+        }
     }
 
     void RotateObj()
