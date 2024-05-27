@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ModelManipulation : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class ModelManipulation : MonoBehaviour
     private Material defaultMaterial;
     [SerializeField]
     private List<GameObject> ports;
+    [SerializeField]
+    private GameObject textField;
 
     private float dist;
     private bool dragging = false;
@@ -87,7 +91,7 @@ public class ModelManipulation : MonoBehaviour
             Debug.LogWarning("Component not found -> port");
             return;
         }
-
+        FindObjectsOfType<Canvas>()[0].transform.Find("wtyczka").gameObject.SetActive(true);
         //TODO: wyświetlanie wtyczki, zmienna port ma w sobie info w co kliknął uzytkownik, można do niej wsadzic model wtyczki do wyświeltenia idk
         
     }

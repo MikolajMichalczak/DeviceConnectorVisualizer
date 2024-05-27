@@ -119,8 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portName: port2
-  modelPrefab: {fileID: 7309247959407776459, guid: 586ee1e3e30d1454a9596dbf96fef59c,
-    type: 3}
+  modelPrefab: {fileID: 7309247959407776459, guid: 586ee1e3e30d1454a9596dbf96fef59c, type: 3}
   description: 
 --- !u!1 &7126625904212184896
 GameObject:
@@ -369,6 +368,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portName: port1
-  modelPrefab: {fileID: 7309247959407776459, guid: 586ee1e3e30d1454a9596dbf96fef59c,
-    type: 3}
+  modelPrefab: {fileID: 7309247959407776459, guid: 586ee1e3e30d1454a9596dbf96fef59c, type: 3}
   description: 
