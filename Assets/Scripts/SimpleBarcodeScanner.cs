@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Vuforia;
 
@@ -19,8 +20,14 @@ public class SimpleBarcodeScanner : MonoBehaviour
         {
             if (modelInstance == null)
             {
-                ModeSelector.Selector.panel.SetActive(true);
-                modelInstance = Instantiate(model, new Vector3(0,0,0), Quaternion.identity);
+                String barCodeText = mBarcodeBehaviour.InstanceData.Text;
+                if(barCodeText == "ABC-abc-1234")
+                {
+                    ModeSelector.Selector.panel.SetActive(true);
+                    modelInstance = Instantiate(model, new Vector3(0,0,0), Quaternion.identity);
+                } else if (barCodeText == "DEF-def-5678") {
+                    //pokaz drugi model (ukryj wczesniejszy i przepnij panel na nowy?)
+                }
             }
         }
     }
