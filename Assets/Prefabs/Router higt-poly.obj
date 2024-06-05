@@ -1,6 +1,6 @@
 # Blender v3.0.0 Beta OBJ File: 'Router higt-poly.blend'
 # www.blender.org
-mtllib Router higt-poly.mtl
+mtllib mat.mtl
 o Circle
 v -0.000000 -0.039046 -0.402652
 v -0.127429 -0.039134 -0.395428

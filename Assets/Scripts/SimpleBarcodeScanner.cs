@@ -1,40 +1,39 @@
 using System;
 using UnityEngine;
 using Vuforia;
-
+ 
 public class SimpleBarcodeScanner : MonoBehaviour
 {
     [SerializeField]
     bool isScannerMocked;
-    public GameObject model;
-    private GameObject modelInstance;
+    public GameObject model_1;
+    public GameObject model_2;
     BarcodeBehaviour mBarcodeBehaviour;
     void Start()
     {
         mBarcodeBehaviour = GetComponent<BarcodeBehaviour>();
     }
-
+ 
     void Update()
     {
         if ((mBarcodeBehaviour != null && mBarcodeBehaviour.InstanceData != null) || isScannerMocked)
         {
-            if (modelInstance == null)
+            ModeSelector.Selector.panel.SetActive(true);
+            String barCodeText = mBarcodeBehaviour.InstanceData.Text;
+            if(barCodeText == "ABC-abc-1234")
             {
-                String barCodeText = mBarcodeBehaviour.InstanceData.Text;
-                if(barCodeText == "ABC-abc-1234")
-                {
-                    ModeSelector.Selector.panel.SetActive(true);
-                    modelInstance = Instantiate(model, new Vector3(0,0,0), Quaternion.identity);
-                } else if (barCodeText == "DEF-def-5678") {
-                    //pokaz drugi model (ukryj wczesniejszy i przepnij panel na nowy?)
-                }
+                model_2.gameObject.SetActive(false);
+                model_1.gameObject.SetActive(true);
+            } else if (barCodeText == "DEF-def-5678") {
+                model_1.gameObject.SetActive(false);
+                model_2.gameObject.SetActive(true);
             }
         }
     }
-
+ 
     public void MockScanner()
     {
         isScannerMocked = !isScannerMocked;
     }
-
+ 
 }

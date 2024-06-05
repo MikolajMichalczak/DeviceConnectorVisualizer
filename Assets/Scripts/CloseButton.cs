@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class CloseButton : MonoBehaviour
 {
+
+    public GameObject parentObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,6 @@ public class CloseButton : MonoBehaviour
     }
 
     public void Close() {
-        GameObject.Find("wtyczka").SetActive(false);
+        parentObject.SetActive(false);
     }
 }

@@ -91,15 +91,28 @@ public class ModelManipulation : MonoBehaviour
             Debug.LogWarning("Component not found -> port");
             return;
         }
-        FindObjectsOfType<Canvas>()[0].transform.Find("wtyczka").gameObject.SetActive(true);
-        //TODO: wyświetlanie wtyczki, zmienna port ma w sobie info w co kliknął uzytkownik, można do niej wsadzic model wtyczki do wyświeltenia idk
-        
+        string desc = port.GetComponent<Port>().description;
+        GameObject xd = FindObjectsOfType<Canvas>()[0].transform.Find(desc).gameObject;
+        if(xd != null)
+        {
+            xd.SetActive(true);
+        }
     }
-
+ 
     void ResetViewedObj(GameObject obj)
     {
         SetMaterial(obj, defaultMaterial);
-        //TODO: usuwanie modelu/info o wyświetlanej wtyczce
+        if(!obj.TryGetComponent<Port>(out Port port))
+        {
+            Debug.LogWarning("Component not found -> port");
+            return;
+        }
+        string desc = port.GetComponent<Port>().description;
+        GameObject xd = FindObjectsOfType<Canvas>()[0].transform.Find(desc).gameObject;
+        if(xd != null)
+        {
+            xd.SetActive(false);
+        }
     }
 
     void HighlightPorts(bool isActive)
